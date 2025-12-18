@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import OwlCarousel from "react-owl-carousel";
 import Skeleton from "../UI/Skeleton";
+import ExpiryCountdown from "../ExpiryCountdown";
 
 const NewItems = () => {
   const [newItems, setNewItems] = useState([]);
@@ -44,6 +45,8 @@ const NewItems = () => {
     getNewItems();
   }, []);
 
+  console.log(newItems);
+
   return (
     <section id="section-items" className="no-bottom">
       <div className="container">
@@ -80,18 +83,10 @@ const NewItems = () => {
                         <button>Buy Now</button>
                         <div className="nft__item_share">
                           <h4>Share</h4>
-                          <a
-                            href=""
-                            target="_blank"
-                            rel="noreferrer"
-                          >
+                          <a href="" target="_blank" rel="noreferrer">
                             <i className="fa fa-facebook fa-lg"></i>
                           </a>
-                          <a
-                            href=""
-                            target="_blank"
-                            rel="noreferrer"
-                          >
+                          <a href="" target="_blank" rel="noreferrer">
                             <i className="fa fa-twitter fa-lg"></i>
                           </a>
                           <a href="">
@@ -127,7 +122,7 @@ const NewItems = () => {
                 <div className="nft__item" key={index}>
                   <div className="author_list_pp">
                     <Link
-                      to={`/author.${item.authorId}`}
+                      to={`/author/${item.authorId}`}
                       data-bs-toggle="tooltip"
                       data-bs-placement="top"
                       title="Creator: Monica Lucas"
@@ -136,7 +131,9 @@ const NewItems = () => {
                       <i className="fa fa-check"></i>
                     </Link>
                   </div>
-                  <div className="de_countdown">5h 30m 32s</div>
+                  {item.expiryDate && (
+                    <ExpiryCountdown expiryDate={item.expiryDate} />
+                  )}
 
                   <div className="nft__item_wrap">
                     <div className="nft__item_extra">
