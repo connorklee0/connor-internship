@@ -45,8 +45,6 @@ const NewItems = () => {
     getNewItems();
   }, []);
 
-  console.log(newItems);
-
   return (
     <section id="section-items" className="no-bottom">
       <div className="container">
