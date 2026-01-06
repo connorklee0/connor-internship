@@ -3,41 +3,22 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import ExpiryCountdown from "../ExpiryCountdown";
 import Skeleton from "../UI/Skeleton";
+import useFetchData from "../../hooks/useFetchData";
 
 const ExploreItems = () => {
-  const [exploreItems, setExploreItems] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [itemCount, setItemCount] = useState(8);
 
-  async function getExploreItems() {
-    setLoading(true);
-    try {
-      const { data } = await axios.get(
-        "https://us-central1-nft-cloud-functions.cloudfunctions.net/explore"
-      );
-      setExploreItems(data);
-      setLoading(false);
-    } catch (error) {
-      setLoading(false);
-    }
-  }
+  const {
+    data: exploreItems,
+    loading,
+    refetch,
+  } = useFetchData(
+    "https://us-central1-nft-cloud-functions.cloudfunctions.net/explore"
+  );
 
-  async function filterItems(filter) {
-    setLoading(true);
-    try {
-      const { data } = await axios.get(
-        `https://us-central1-nft-cloud-functions.cloudfunctions.net/explore?filter=${filter}`
-      );
-      setExploreItems(data);
-      setLoading(false);
-    } catch (error) {
-      setLoading(false);
-    }
-  }
-
-  useEffect(() => {
-    getExploreItems();
-  }, []);
+  const handleFilter = (filterValue) => {
+    refetch({ filter: filterValue });
+  };
 
   return (
     <>
@@ -45,7 +26,7 @@ const ExploreItems = () => {
         <select
           id="filter-items"
           defaultValue=""
-          onChange={(event) => filterItems(event.target.value)}
+          onChange={(event) => handleFilter(event.target.value)}
         >
           <option value="">Default</option>
           <option value="price_low_to_high">Price, Low to High</option>
