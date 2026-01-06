@@ -1,13 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import OwlCarousel from "react-owl-carousel";
 import Skeleton from "../UI/Skeleton";
+import useFetchData from "../../hooks/useFetchData";
 
 const HotCollections = () => {
-  const [nfts, setNfts] = useState([]);
-  const [loading, setLoading] = useState(true);
-
   const carouselSettings = {
     loop: true,
     margin: 12,
@@ -28,22 +25,9 @@ const HotCollections = () => {
     nav: true,
   };
 
-  async function fetchHotCollectionsData() {
-    setLoading(true)
-    try {
-      const { data } = await axios.get(
-        "https://us-central1-nft-cloud-functions.cloudfunctions.net/hotCollections"
-      );
-      setNfts(data);
-      setLoading(false);
-    } catch (error) {
-      setLoading(false);
-    }
-  }
-
-  useEffect(() => {
-    fetchHotCollectionsData();
-  }, []);
+  const { data: items, loading } = useFetchData(
+    "https://us-central1-nft-cloud-functions.cloudfunctions.net/hotCollections"
+  );
 
   return (
     <section id="section-collections" className="no-bottom">
@@ -90,7 +74,7 @@ const HotCollections = () => {
               {...carouselSettings}
               key={loading}
             >
-              {nfts.map((nft, index) => (
+              {items.map((nft, index) => (
                 <div className="nft_coll" key={index}>
                   <div className="nft_wrap">
                     <Link to={`/item-details/${nft.nftId}`}>
