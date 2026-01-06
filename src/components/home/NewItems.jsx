@@ -1,14 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import OwlCarousel from "react-owl-carousel";
 import Skeleton from "../UI/Skeleton";
 import ExpiryCountdown from "../ExpiryCountdown";
+import useFetchData from "../../hooks/useFetchData";
 
 const NewItems = () => {
-  const [newItems, setNewItems] = useState([]);
-  const [loading, setLoading] = useState(true);
-
   const carouselSettings = {
     loop: true,
     margin: 12,
@@ -29,22 +26,9 @@ const NewItems = () => {
     nav: true,
   };
 
-  async function getNewItems() {
-    setLoading(true)
-    try {
-      const { data } = await axios.get(
-        "https://us-central1-nft-cloud-functions.cloudfunctions.net/newItems"
-      );
-      setNewItems(data);
-      setLoading(false);
-    } catch (error) {
-      setLoading(false);
-    }
-  }
-
-  useEffect(() => {
-    getNewItems();
-  }, []);
+  const { data: newItems, loading } = useFetchData(
+    "https://us-central1-nft-cloud-functions.cloudfunctions.net/newItems"
+  );
 
   return (
     <section id="section-items" className="no-bottom">

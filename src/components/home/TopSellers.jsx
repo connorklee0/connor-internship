@@ -1,28 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import Skeleton from "../UI/Skeleton";
+import useFetchData from "../../hooks/useFetchData";
 
 const TopSellers = () => {
-  const [topSellers, setTopSellers] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  async function getTopSellers() {
-    setLoading(true)
-    try {
-      const { data } = await axios.get(
-        "https://us-central1-nft-cloud-functions.cloudfunctions.net/topSellers"
-      );
-      setTopSellers(data);
-      setLoading(false);
-    } catch (error) {
-      setLoading(true);
-    }
-  }
-
-  useEffect(() => {
-    getTopSellers();
-  }, []);
+  const { data: topSellers, loading } = useFetchData(
+    "https://us-central1-nft-cloud-functions.cloudfunctions.net/topSellers"
+  );
 
   return (
     <section id="section-popular" className="pb-5">
