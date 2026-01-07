@@ -100,6 +100,8 @@ const NewItems = () => {
               className="owl-theme"
               {...carouselSettings}
               key={loading}
+              data-aos="fade-in"
+              data-aos-duration="1000"
             >
               {newItems.map((item, index) => (
                 <div className="nft__item" key={index}>

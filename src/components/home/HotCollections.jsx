@@ -73,6 +73,8 @@ const HotCollections = () => {
               className="owl-theme"
               {...carouselSettings}
               key={loading}
+              data-aos="fade-in"
+              data-aos-duration="1000"
             >
               {items.map((nft, index) => (
                 <div className="nft_coll" key={index}>
