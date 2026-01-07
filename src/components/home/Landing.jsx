@@ -29,7 +29,7 @@ const Landing = () => {
               <div className="spacer-10"></div>
               <h1
                 data-aos="fade-up"
-                data-aos-delay="500"
+                data-aos-delay="200"
                 data-aos-duration="2000"
               >
                 Create, sell or collect digital items.
@@ -37,7 +37,7 @@ const Landing = () => {
               <p
                 className="lead"
                 data-aos="fade-up"
-                data-aos-delay="500"
+                data-aos-delay="200"
                 data-aos-duration="2000"
               >
                 Unit of data stored on a digital ledger, called a blockchain,
@@ -49,7 +49,7 @@ const Landing = () => {
                 className="btn-main lead"
                 to="/explore"
                 data-aos="fade-in"
-                data-aos-delay="1200"
+                data-aos-delay="1000"
                 data-aos-duration="1000"
               >
                 Explore
@@ -59,7 +59,7 @@ const Landing = () => {
             <div
               className="col-md-6 xs-hide"
               data-aos="fade-in"
-              data-aos-delay="1200"
+              data-aos-delay="1000"
               data-aos-duration="1000"
             >
               <img src={NFT} className="lazy img-fluid" alt="" />

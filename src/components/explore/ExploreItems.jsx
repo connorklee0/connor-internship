@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import ExpiryCountdown from "../ExpiryCountdown";
 import Skeleton from "../UI/Skeleton";
 import useFetchData from "../../hooks/useFetchData";
@@ -16,8 +15,8 @@ const ExploreItems = () => {
     "https://us-central1-nft-cloud-functions.cloudfunctions.net/explore"
   );
 
-  const handleFilter = (filterValue) => {
-    refetch({ filter: filterValue });
+  const handleFilter = async (filterValue) => {
+    await refetch({ filter: filterValue });
   };
 
   return (
@@ -104,7 +103,11 @@ const ExploreItems = () => {
         ))
       )}
 
-      <div className="col-md-12 text-center">
+      <div
+        className="col-md-12 text-center"
+        data-aos="fade-in"
+        data-aos-duration="1000"
+      >
         {itemCount !== 16 && (
           <Link
             onClick={() => setItemCount(itemCount + 4)}

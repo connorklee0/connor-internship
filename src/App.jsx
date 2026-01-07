@@ -9,7 +9,7 @@ import Aos from "aos";
 import "aos/dist/aos.css";
 
 function App() {
-  Aos.init({ once: true, easing: "ease", offset: 50 });
+  Aos.init({ once: true, easing: "ease"});
   return (
     <Router>
       <Nav />
