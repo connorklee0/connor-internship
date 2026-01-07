@@ -19,7 +19,7 @@ const ExploreItems = () => {
   const handleFilter = (filterValue) => {
     refetch({ filter: filterValue });
   };
-  console.log(exploreItems);
+
   return (
     <>
       <div>
