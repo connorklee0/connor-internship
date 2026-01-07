@@ -14,6 +14,8 @@ const ItemDetails = () => {
     window.scrollTo(0, 0);
   }, []);
 
+  console.log(itemData)
+
   return (
     <div id="wrapper">
       <div className="no-bottom no-top" id="content">
@@ -105,7 +107,7 @@ const ItemDetails = () => {
                         <h6>Owner</h6>
                         <div className="item_author">
                           <div className="author_list_pp">
-                            <Link to="/author">
+                            <Link to={`/author/${itemData.ownerId}`}>
                               <img
                                 className="lazy"
                                 src={itemData.ownerImage}
@@ -126,7 +128,7 @@ const ItemDetails = () => {
                         <h6>Creator</h6>
                         <div className="item_author">
                           <div className="author_list_pp">
-                            <Link to="/author">
+                            <Link to={`/author/${itemData.creatorId}`}>
                               <img
                                 className="lazy"
                                 src={itemData.creatorImage}
